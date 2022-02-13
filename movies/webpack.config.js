@@ -46,6 +46,18 @@ Encore
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
+  .enablePostCssLoader((options) => {
+    options.postcssOptions = {
+      config: "./postcss.config.js",
+    };
+  })
+
+  .copyFiles({
+    from: "./assets/images",
+    to: "images/[path][name].[hash:8].[ext]",
+    pattern: /\.(png|jpg|jpeg)$/,
+  })
+
   .configureBabel((config) => {
     config.plugins.push("@babel/plugin-proposal-class-properties");
   })
